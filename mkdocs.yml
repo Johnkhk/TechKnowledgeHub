@@ -1,0 +1,5 @@
+site_name: My Test MkDocs Project
+nav:
+  - Home: index.md
+theme:
+  name: mkdocs
