@@ -1,5 +1,40 @@
-site_name: My Test MkDocs Project
+site_name: "Your Project Name"
+theme:
+  name: "material"
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      # base_path: $relative
+      base_path: !relative $config_dir  # Relative to the root directory with mkdocs.yml
+
+
 nav:
   - Home: index.md
-theme:
-  name: mkdocs
+  - Design Patterns:
+      - Creational:
+          - Overview: design-patterns/creational/index.md
+          - Singleton: design-patterns/creational/singleton.md
+      - Structural:
+          - Overview: design-patterns/structural/index.md
+          # Add other structural pattern links here
+      - Behavioral:
+          - Overview: design-patterns/behavioral/index.md
+          # Add other behavioral pattern links here
+  - System Design: system-design/index.md
+
+plugins:
+  - search
+  - mermaid2:
+      javascript: https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs
+
