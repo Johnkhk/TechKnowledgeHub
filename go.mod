@@ -1,3 +1,3 @@
-module code/design-patterns/creational/singleton/go
+module tkh
 
 go 1.21

@@ -1,11 +1,11 @@
-package main
+package usage
 
 import (
 	// Standard library packages
 	"testing"
 
 	// External package
-	impl "../implementation"
+	impl "tkh/code/design-patterns/creational/singleton/go/implementation"
 )
 
 func TestSingleton(t *testing.T) {

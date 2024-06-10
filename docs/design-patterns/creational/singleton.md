@@ -59,17 +59,7 @@ classDiagram
 
 === "Go"
     ```go
-    --8<-- "code/design-patterns/creational/singleton/python/singleton_implementation.go"
-    ```
-
-=== "C++"
-    ```cpp
-    // Coming Soon
-    ```
-
-=== "Rust"
-    ```rust
-    // Coming Soon
+    --8<-- "code/design-patterns/creational/singleton/go/implementation/singleton_implementation.go"
     ```
 
 ### Code Usage
@@ -77,4 +67,9 @@ classDiagram
 === "Python"
     ```python
     --8<-- "code/design-patterns/creational/singleton/python/singleton_usage.py"
+    ```
+
+=== "Go"
+    ```go
+    --8<-- "code/design-patterns/creational/singleton/go/usage/singleton_usage_test.go"
     ```

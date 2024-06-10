@@ -1,4 +1,4 @@
-site_name: "Your Project Name"
+site_name: "Tech Knowledege Hub"
 theme:
   name: "material"
 
@@ -22,9 +22,10 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Design Patterns:
+      - Overview: design-patterns/design-patterns.md
       - Creational:
-          - Overview: design-patterns/creational/index.md
           - Singleton: design-patterns/creational/singleton.md
+          - Factory Method: design-patterns/creational/factory-method.md
       - Structural:
           - Overview: design-patterns/structural/index.md
           # Add other structural pattern links here
