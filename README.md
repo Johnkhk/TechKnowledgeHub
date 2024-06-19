@@ -4,7 +4,7 @@
 
 ## deploy:
 
-`push to gh-pages branch`
+`/path/to/mkdocs gh-deploy`
 
 ## test patterns
 
