@@ -27,6 +27,7 @@ nav:
           - Singleton: design-patterns/creational/singleton.md
           - Factory Method: design-patterns/creational/factory-method.md
           - Abstract Factory: design-patterns/creational/abstract-factory.md
+          - Builder: design-patterns/creational/builder.md
       - Structural:
           - Overview: design-patterns/structural/index.md
           # Add other structural pattern links here
