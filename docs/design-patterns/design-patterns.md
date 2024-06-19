@@ -4,7 +4,7 @@
 
 - [Singleton](creational/singleton.md)
 - [Factory Method](creational/factory-method.md)
-- [Abstract Factory](not_implemented.md)
+- [Abstract Factory](creational/abstract-factory.md)
 - [Builder](not_implemented.md)
 - [Prototype](not_implemented.md)
 - [Object Pool](not_implemented.md)
