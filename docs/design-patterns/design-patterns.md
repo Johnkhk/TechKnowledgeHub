@@ -6,7 +6,7 @@
 - [Factory Method](creational/factory-method.md)
 - [Abstract Factory](creational/abstract-factory.md)
 - [Builder](creational/builder.md)
-- [Prototype](not_implemented.md)
+- [Prototype](creational/prototype.md)
 - [Object Pool](not_implemented.md)
 
 ## Structural
