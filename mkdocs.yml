@@ -29,6 +29,7 @@ nav:
           - Abstract Factory: design-patterns/creational/abstract-factory.md
           - Builder: design-patterns/creational/builder.md
           - Prototype: design-patterns/creational/prototype.md
+          - Object Pool: design-patterns/creational/object-pool.md
       - Structural:
           - Overview: design-patterns/structural/index.md
           # Add other structural pattern links here
