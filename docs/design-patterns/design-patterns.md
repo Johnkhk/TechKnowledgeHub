@@ -7,7 +7,7 @@
 - [Abstract Factory](creational/abstract-factory.md)
 - [Builder](creational/builder.md)
 - [Prototype](creational/prototype.md)
-- [Object Pool](not_implemented.md)
+- [Object Pool](creational/object-pool.md)
 
 ## Structural
 
