@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../abstract-factory/" rel="prev"/>
+<link href="../prototype/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-9.5.26" name="generator"/>
+<title>Builder - Tech Knowledge Hub</title>
+<link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#builder-pattern">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Tech Knowledge Hub" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Tech Knowledge Hub">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Tech Knowledge Hub
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Builder
+            
+          </span>
+</div>
+</div>
+</div>
+<script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Tech Knowledge Hub" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Tech Knowledge Hub">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Tech Knowledge Hub
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
+    Home
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Design Patterns
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Design Patterns
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../design-patterns/">
+<span class="md-ellipsis">
+    Overview
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Creational
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+            Creational
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../singleton/">
+<span class="md-ellipsis">
+    Singleton
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../factory-method/">
+<span class="md-ellipsis">
+    Factory Method
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../abstract-factory/">
+<span class="md-ellipsis">
+    Abstract Factory
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Builder
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Builder
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      Description
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#benefits">
+<span class="md-ellipsis">
+      Benefits
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+<span class="md-ellipsis">
+      Example
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implementation">
+<span class="md-ellipsis">
+      Implementation
+    </span>
+</a>
+<nav aria-label="Implementation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diagram">
+<span class="md-ellipsis">
+      Diagram
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-implementation">
+<span class="md-ellipsis">
+      Code Implementation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-usage">
+<span class="md-ellipsis">
+      Code Usage
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../prototype/">
+<span class="md-ellipsis">
+    Prototype
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../object-pool/">
+<span class="md-ellipsis">
+    Object Pool
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Structural
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span>
+            Structural
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/">
+<span class="md-ellipsis">
+    Overview
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Behavioral
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span>
+            Behavioral
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../behavioral/">
+<span class="md-ellipsis">
+    Overview
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../system-design/">
+<span class="md-ellipsis">
+    System Design
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      Description
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#benefits">
+<span class="md-ellipsis">
+      Benefits
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+<span class="md-ellipsis">
+      Example
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implementation">
+<span class="md-ellipsis">
+      Implementation
+    </span>
+</a>
+<nav aria-label="Implementation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diagram">
+<span class="md-ellipsis">
+      Diagram
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-implementation">
+<span class="md-ellipsis">
+      Code Implementation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-usage">
+<span class="md-ellipsis">
+      Code Usage
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="builder-pattern">Builder Pattern<a class="headerlink" href="#builder-pattern" title="Permanent link">¶</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">¶</a></h2>
+<p>Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.</p>
+<p>Let's say you are building a house - all houses need 4 walls, floor, roof and door. But some houses want a backyard, heating, etc. You don't want to create a <strong>million subclasses</strong> and you also don't want a <strong>big constructor</strong> (with a bunch of null calls). </p>
+<p>Note: Having a director class is also optional, but it can help with organizing construction routines. </p>
+<h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">¶</a></h2>
+<ol>
+<li><strong>Controlled Construction Process</strong>: The Builder pattern allows you to construct objects step by step, providing more control over the construction process and making it easier to create complex objects.</li>
+</ol>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h2>
+<p>Let's say you want to build all types of houses. </p>
+<p>In this example:</p>
+<ul>
+<li>The <code>House</code> is the complex object we want to create.</li>
+<li>We want to build a wooden house or brick house - each requires a different setup for the foundation. (due to material)</li>
+<li>We might also want a luxury or basic house. The <code>Director</code> can take care of this.</li>
+</ul>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">¶</a></h2>
+<ul>
+<li>The complex object <code>House</code> has a default constructor initializing all its fields to <code>None</code>. The fields will include all types of possible houses. </li>
+<li>The <code>HouseBuilder</code> is our basic builder interface.</li>
+<li><code>WoodenHouseBuilder</code> and <code>BrickHouseBuilder</code> are our concrete house builders.</li>
+<li>The <code>Director</code> can <code>construct_simple_house()</code> or <code>construct_luxury_house()</code> or <code>construct_house_with_3_bedrooms()</code>, etc. </li>
+<li><code>build_backyard(type)</code> can take a type too to mix and match!</li>
+<li>The steps methods return the builder so we allow for chanining calls. </li>
+</ul>
+<h3 id="diagram">Diagram<a class="headerlink" href="#diagram" title="Permanent link">¶</a></h3>
+<!-- 2. A mermaid diagram -->
+<pre class="mermaid"><code>classDiagram
+    class House {
+        +foundation: str
+        +structure: str
+        +roof: str
+        +rooms: str
+        +backyard: str
+    }
+
+    class HouseBuilder {
+        +build_foundation(): HouseBuilder
+        +build_structure(): HouseBuilder
+        +build_roof(): HouseBuilder
+        +build_rooms(number: int): HouseBuilder
+        +build_backyard(type: str): HouseBuilder
+        +build(): House
+    }
+
+    class WoodenHouseBuilder {
+        +build_foundation(): WoodenHouseBuilder
+        +build_structure(): WoodenHouseBuilder
+        +build_roof(): WoodenHouseBuilder
+        +build_rooms(number: int): WoodenHouseBuilder
+        +build_backyard(type: str): WoodenHouseBuilder
+        +build(): House
+    }
+
+    class BrickHouseBuilder {
+        +build_foundation(): BrickHouseBuilder
+        +build_structure(): BrickHouseBuilder
+        +build_roof(): BrickHouseBuilder
+        +build_rooms(number: int): BrickHouseBuilder
+        +build_backyard(type: str): BrickHouseBuilder
+        +build(): House
+    }
+
+    class Director {
+        +construct_simple_house(): House
+        +construct_luxury_house(): House
+        +construct_house_with_3_bedrooms(): House
+    }
+
+    HouseBuilder &lt;|-- WoodenHouseBuilder
+    HouseBuilder &lt;|-- BrickHouseBuilder
+    Director --&gt; HouseBuilder
+</code></pre>
+<h3 id="code-implementation">Code Implementation<a class="headerlink" href="#code-implementation" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Go</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span> <span class="nc">House</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foundation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roof</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backyard</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"House with foundation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">foundation</span><span class="si">}</span><span class="s2">, structure: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"roof: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">roof</span><span class="si">}</span><span class="s2">, rooms: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="si">}</span><span class="s2">, backyard: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">backyard</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HouseBuilder</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build_foundation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build_roof</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build_backyard</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">WoodenHouseBuilder</span><span class="p">(</span><span class="n">HouseBuilder</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span> <span class="o">=</span> <span class="n">House</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">build_foundation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">foundation</span> <span class="o">=</span> <span class="s2">"Wooden Foundation"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="s2">"Wooden Structure"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_roof</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">roof</span> <span class="o">=</span> <span class="s2">"Wooden Roof"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> Wooden Rooms"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_backyard</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">backyard</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Wooden </span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s2"> Backyard"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">house</span>
+
+
+<span class="k">class</span> <span class="nc">BrickHouseBuilder</span><span class="p">(</span><span class="n">HouseBuilder</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span> <span class="o">=</span> <span class="n">House</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">build_foundation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">foundation</span> <span class="o">=</span> <span class="s2">"Concrete Foundation"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="s2">"Brick Structure"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_roof</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">roof</span> <span class="o">=</span> <span class="s2">"Concrete Roof"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> Brick Rooms"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_backyard</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">house</span><span class="o">.</span><span class="n">backyard</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Brick </span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s2"> Backyard"</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">house</span>
+
+
+<span class="k">class</span> <span class="nc">Director</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_builder</span> <span class="o">=</span> <span class="n">builder</span>
+
+    <span class="k">def</span> <span class="nf">construct_simple_house</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_builder</span><span class="o">.</span><span class="n">build_foundation</span><span class="p">()</span><span class="o">.</span><span class="n">build_structure</span><span class="p">()</span><span class="o">.</span><span class="n">build_roof</span><span class="p">()</span><span class="o">.</span><span class="n">build_rooms</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">construct_luxury_house</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_builder</span><span class="o">.</span><span class="n">build_foundation</span><span class="p">()</span><span class="o">.</span><span class="n">build_structure</span><span class="p">()</span><span class="o">.</span><span class="n">build_roof</span><span class="p">()</span><span class="o">.</span><span class="n">build_rooms</span><span class="p">(</span>
+            <span class="mi">5</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">build_backyard</span><span class="p">(</span><span class="s2">"Luxury"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">builder</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="p">)</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Foundation</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Structure</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Roof</span><span class="w">       </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Rooms</span><span class="w">      </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Backyard</span><span class="w">   </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="nx">House</span><span class="p">)</span><span class="w"> </span><span class="nx">String</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"House with foundation: %s, structure: %s, roof: %s, rooms: %s, backyard: %s"</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">h</span><span class="p">.</span><span class="nx">Foundation</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Structure</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Roof</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Rooms</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Backyard</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">BuildFoundation</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="w">    </span><span class="nx">BuildStructure</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="w">    </span><span class="nx">BuildRoof</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="w">    </span><span class="nx">BuildRooms</span><span class="p">(</span><span class="nx">number</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="w">    </span><span class="nx">BuildBackyard</span><span class="p">(</span><span class="nx">typ</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="w">    </span><span class="nx">Build</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">WoodenHouseBuilder</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">house</span><span class="w"> </span><span class="nx">House</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildFoundation</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Foundation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Wooden Foundation"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildStructure</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Structure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Wooden Structure"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildRoof</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Roof</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Wooden Roof"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildRooms</span><span class="p">(</span><span class="nx">number</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Rooms</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"%d Wooden Rooms"</span><span class="p">,</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildBackyard</span><span class="p">(</span><span class="nx">typ</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Backyard</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"Wooden %s Backyard"</span><span class="p">,</span><span class="w"> </span><span class="nx">typ</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">WoodenHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">Build</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">BrickHouseBuilder</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">house</span><span class="w"> </span><span class="nx">House</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildFoundation</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Foundation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Concrete Foundation"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildStructure</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Structure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Brick Structure"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildRoof</span><span class="p">()</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Roof</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Concrete Roof"</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildRooms</span><span class="p">(</span><span class="nx">number</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Rooms</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"%d Brick Rooms"</span><span class="p">,</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">BuildBackyard</span><span class="p">(</span><span class="nx">typ</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">HouseBuilder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">Backyard</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"Brick %s Backyard"</span><span class="p">,</span><span class="w"> </span><span class="nx">typ</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">BrickHouseBuilder</span><span class="p">)</span><span class="w"> </span><span class="nx">Build</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">house</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Director</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="nx">HouseBuilder</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">Director</span><span class="p">)</span><span class="w"> </span><span class="nx">ConstructSimpleHouse</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">builder</span><span class="p">.</span><span class="nx">BuildFoundation</span><span class="p">().</span><span class="nx">BuildStructure</span><span class="p">().</span><span class="nx">BuildRoof</span><span class="p">().</span><span class="nx">BuildRooms</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">Build</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">Director</span><span class="p">)</span><span class="w"> </span><span class="nx">ConstructLuxuryHouse</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">builder</span><span class="p">.</span><span class="nx">BuildFoundation</span><span class="p">().</span><span class="nx">BuildStructure</span><span class="p">().</span><span class="nx">BuildRoof</span><span class="p">().</span><span class="nx">BuildRooms</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">BuildBackyard</span><span class="p">(</span><span class="s">"Luxury"</span><span class="p">).</span><span class="nx">Build</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">Director</span><span class="p">)</span><span class="w"> </span><span class="nx">ConstructHouseWith3Bedrooms</span><span class="p">()</span><span class="w"> </span><span class="nx">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">builder</span><span class="p">.</span><span class="nx">BuildFoundation</span><span class="p">().</span><span class="nx">BuildStructure</span><span class="p">().</span><span class="nx">BuildRoof</span><span class="p">().</span><span class="nx">BuildRooms</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">BuildBackyard</span><span class="p">(</span><span class="s">"Standard"</span><span class="p">).</span><span class="nx">Build</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></div>
+<h3 id="code-usage">Code Usage<a class="headerlink" href="#code-usage" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">Go</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">builder</span> <span class="kn">import</span> <span class="n">WoodenHouseBuilder</span><span class="p">,</span> <span class="n">BrickHouseBuilder</span><span class="p">,</span> <span class="n">Director</span>
+
+<span class="c1"># Client code</span>
+<span class="n">wooden_house_builder</span> <span class="o">=</span> <span class="n">WoodenHouseBuilder</span><span class="p">()</span>
+<span class="n">brick_house_builder</span> <span class="o">=</span> <span class="n">BrickHouseBuilder</span><span class="p">()</span>
+
+<span class="n">director</span> <span class="o">=</span> <span class="n">Director</span><span class="p">(</span><span class="n">wooden_house_builder</span><span class="p">)</span>
+<span class="n">simple_wooden_house</span> <span class="o">=</span> <span class="n">director</span><span class="o">.</span><span class="n">construct_simple_house</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simple_wooden_house</span><span class="p">)</span>
+
+<span class="n">director</span> <span class="o">=</span> <span class="n">Director</span><span class="p">(</span><span class="n">brick_house_builder</span><span class="p">)</span>
+<span class="n">luxury_brick_house</span> <span class="o">=</span> <span class="n">director</span><span class="o">.</span><span class="n">construct_luxury_house</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">luxury_brick_house</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">builder</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="s">"fmt"</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">woodenHouseBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">WoodenHouseBuilder</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">brickHouseBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">BrickHouseBuilder</span><span class="p">{}</span>
+
+<span class="w">    </span><span class="nx">director</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Director</span><span class="p">{</span><span class="nx">builder</span><span class="p">:</span><span class="w"> </span><span class="nx">woodenHouseBuilder</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">simpleWoodenHouse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">director</span><span class="p">.</span><span class="nx">ConstructSimpleHouse</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">simpleWoodenHouse</span><span class="p">)</span><span class="w"> </span><span class="c1">// Output: House with foundation: Wooden Foundation, structure: Wooden Structure, roof: Wooden Roof, rooms: 2 Wooden Rooms, backyard:</span>
+
+<span class="w">    </span><span class="nx">director</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Director</span><span class="p">{</span><span class="nx">builder</span><span class="p">:</span><span class="w"> </span><span class="nx">brickHouseBuilder</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">luxuryBrickHouse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">director</span><span class="p">.</span><span class="nx">ConstructLuxuryHouse</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">luxuryBrickHouse</span><span class="p">)</span><span class="w"> </span><span class="c1">// Output: House with foundation: Concrete Foundation, structure: Brick Structure, roof: Concrete Roof, rooms: 5 Brick Rooms, backyard: Brick Luxury Backyard</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></div>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script></body>
+</html>
