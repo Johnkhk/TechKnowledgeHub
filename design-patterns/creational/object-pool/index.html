@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="../prototype/" rel="prev"/>
-<link href="../../structural/" rel="next"/>
+<link href="../../structural/adapter/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.0, mkdocs-material-9.5.26" name="generator"/>
 <title>Object Pool - Tech Knowledge Hub</title>
@@ -268,9 +268,23 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../structural/">
+<a class="md-nav__link" href="../../structural/adapter/">
 <span class="md-ellipsis">
-    Overview
+    Adapter
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/bridge/">
+<span class="md-ellipsis">
+    Bridge
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/composite/">
+<span class="md-ellipsis">
+    Composite
   </span>
 </a>
 </li>
@@ -402,8 +416,10 @@
 </ul>
 <h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">¶</a></h2>
 <ul>
-<li>The <code>Reusuable Pool</code> should ideally be a <a href="/design-patterns/creational/singleton">Singleton</a>. </li>
+<li>The <code>Reusuable Pool</code> should ideally be a <a href="/design-patterns/creational/singleton">Singleton</a>. <ul>
 <li>As such we have a <code>getInstance</code> method to get the singleton. </li>
+</ul>
+</li>
 <li><code>acquire()</code> acquires a Bullet from the pool.</li>
 <li><code>release(bullet: Bullet)</code> releases the bullet back to the pool.</li>
 <li><code>maxBullets</code> is used to limit the number of bullets. </li>
