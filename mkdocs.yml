@@ -31,7 +31,7 @@ nav:
           - Prototype: design-patterns/creational/prototype.md
           - Object Pool: design-patterns/creational/object-pool.md
       - Structural:
-          - Overview: design-patterns/structural/index.md
+          - Adapter: design-patterns/structural/adapter.md
           # Add other structural pattern links here
       - Behavioral:
           - Overview: design-patterns/behavioral/index.md

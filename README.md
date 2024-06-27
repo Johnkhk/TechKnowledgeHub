@@ -8,5 +8,5 @@
 
 ## test patterns
 
-- `go test /path/to/file.go`
+- `go test /path/to/go`
 - `python3 /path/to/file.py`

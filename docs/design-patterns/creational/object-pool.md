@@ -21,7 +21,7 @@ In this example:
 ## Implementation
 
 - The `Reusuable Pool` should ideally be a [Singleton](/design-patterns/creational/singleton). 
-  - As such we have a `getInstance` method to get the singleton. 
+    - As such we have a `getInstance` method to get the singleton. 
 - `acquire()` acquires a Bullet from the pool.
 - `release(bullet: Bullet)` releases the bullet back to the pool.
 - `maxBullets` is used to limit the number of bullets. 

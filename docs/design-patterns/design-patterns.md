@@ -11,7 +11,7 @@
 
 ## Structural
 
-- [Adapter](not_implemented.md)
+- [Adapter](structural/adapter.md)
 - [Bridge](not_implemented.md)
 - [Composite](not_implemented.md)
 - [Decorator](not_implemented.md)
