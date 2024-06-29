@@ -34,6 +34,7 @@ nav:
           - Adapter: design-patterns/structural/adapter.md
           - Bridge: design-patterns/structural/bridge.md
           - Composite: design-patterns/structural/composite.md
+          - Decorator: design-patterns/structural/decorator.md
           # Add other structural pattern links here
       - Behavioral:
           - Overview: design-patterns/behavioral/index.md

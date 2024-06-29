@@ -10,3 +10,7 @@
 
 - `go test /path/to/go`
 - `python3 /path/to/file.py`
+
+### go
+
+go run /path/to/file1.go /path/to/file2.go

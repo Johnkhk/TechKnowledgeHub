@@ -6,7 +6,7 @@ Bridge is a structural design pattern that lets you split a large class or a set
 
 **abstraction** - The high level control layer for some entity. This does not do work and simply delegates to the `implementation` layer. (example: abstraction is UI and implementation is Backend)
 
-Bridge is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, [Adapter](/design-patterns/structural/Adapter) is commonly used with an existing app/legacy code to make some otherwise-incompatible classes work together nicely.
+Bridge is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, [Adapter](/design-patterns/structural/adapter.md) is commonly used with an existing app/legacy code to make some otherwise-incompatible classes work together nicely.
 
 
 
