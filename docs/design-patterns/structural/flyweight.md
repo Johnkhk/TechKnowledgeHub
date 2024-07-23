@@ -1,4 +1,4 @@
-# flyweight Pattern
+# Flyweight Pattern
 
 ## Description
 
