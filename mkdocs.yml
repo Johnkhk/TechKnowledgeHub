@@ -36,6 +36,7 @@ nav:
           - Composite: design-patterns/structural/composite.md
           - Decorator: design-patterns/structural/decorator.md
           - Facade: design-patterns/structural/facade.md
+          - Flyweight: design-patterns/structural/flyweight.md
           # Add other structural pattern links here
       - Behavioral:
           - Overview: design-patterns/behavioral/index.md
