@@ -37,6 +37,7 @@ nav:
           - Decorator: design-patterns/structural/decorator.md
           - Facade: design-patterns/structural/facade.md
           - Flyweight: design-patterns/structural/flyweight.md
+          - Proxy: design-patterns/structural/proxy.md
           # Add other structural pattern links here
       - Behavioral:
           - Overview: design-patterns/behavioral/index.md
