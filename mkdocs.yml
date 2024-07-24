@@ -40,7 +40,7 @@ nav:
           - Proxy: design-patterns/structural/proxy.md
           # Add other structural pattern links here
       - Behavioral:
-          - Overview: design-patterns/behavioral/index.md
+          - Chain of Responsibility: design-patterns/behavioral/chain-of-responsibility.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
