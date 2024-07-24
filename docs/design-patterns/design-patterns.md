@@ -12,12 +12,12 @@
 ## Structural
 
 - [Adapter](structural/adapter.md)
-- [Bridge](not_implemented.md)
-- [Composite](not_implemented.md)
-- [Decorator](not_implemented.md)
-- [Facade](not_implemented.md)
-- [Flyweight](not_implemented.md)
-- [Proxy](not_implemented.md)
+- [Bridge](structural/bridge.md)
+- [Composite](structural/composite.md)
+- [Decorator](structural/decorator.md)
+- [Facade](structural/facade.md)
+- [Flyweight](structural/flyweight.md)
+- [Proxy](structural/proxy.md)
 
 ## Behavioral
 
