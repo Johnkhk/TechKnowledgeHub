@@ -42,6 +42,7 @@ nav:
       - Behavioral:
           - Chain of Responsibility: design-patterns/behavioral/chain-of-responsibility.md
           - Command: design-patterns/behavioral/command.md
+          - Iterator: design-patterns/behavioral/iterator.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
