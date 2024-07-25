@@ -19,7 +19,7 @@ COR differs from [Decorator](/design-patterns/structural/decorator.md) in that d
 ## Benefits
 
 1. Use COR when you have to process requests in multiple ways, but don't know the processing order.
-3. **Open/Closed Principle**: You can introduce new handlers into the app without breaking the existing client code.
+2. **Open/Closed Principle**: You can introduce new handlers into the app without breaking the existing client code.
 
 ## Example
 
