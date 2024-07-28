@@ -44,6 +44,7 @@ nav:
           - Command: design-patterns/behavioral/command.md
           - Iterator: design-patterns/behavioral/iterator.md
           - Mediator: design-patterns/behavioral/mediator.md
+          - Memento: design-patterns/behavioral/memento.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
