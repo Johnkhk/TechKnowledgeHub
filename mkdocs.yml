@@ -46,6 +46,7 @@ nav:
           - Mediator: design-patterns/behavioral/mediator.md
           - Memento: design-patterns/behavioral/memento.md
           - Observer: design-patterns/behavioral/observer.md
+          - State: design-patterns/behavioral/state.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
