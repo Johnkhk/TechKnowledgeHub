@@ -5,11 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="../chain-of-responsibility/" rel="prev"/>
-<link href="../iterator/" rel="next"/>
+<link href="../memento/" rel="prev"/>
+<link href="../state/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.0, mkdocs-material-9.5.26" name="generator"/>
-<title>Command - Tech Knowledge Hub</title>
+<title>Observer - Tech Knowledge Hub</title>
 <link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#command-pattern">
+<a class="md-skip" href="#observer-pattern">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Command
+              Observer
             
           </span>
 </div>
@@ -272,17 +272,45 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../command/">
+<span class="md-ellipsis">
+    Command
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../iterator/">
+<span class="md-ellipsis">
+    Iterator
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../mediator/">
+<span class="md-ellipsis">
+    Mediator
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../memento/">
+<span class="md-ellipsis">
+    Memento
+  </span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    Command
+    Observer
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    Command
+    Observer
   </span>
 </a>
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
@@ -346,34 +374,6 @@
 </li>
 </ul>
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../iterator/">
-<span class="md-ellipsis">
-    Iterator
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../mediator/">
-<span class="md-ellipsis">
-    Mediator
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../memento/">
-<span class="md-ellipsis">
-    Memento
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../observer/">
-<span class="md-ellipsis">
-    Observer
-  </span>
-</a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../state/">
@@ -490,166 +490,127 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="command-pattern">Command Pattern<a class="headerlink" href="#command-pattern" title="Permanent link">¶</a></h1>
+<h1 id="observer-pattern">Observer Pattern<a class="headerlink" href="#observer-pattern" title="Permanent link">¶</a></h1>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">¶</a></h2>
-<p>Command is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you parameterize methods with different requests, delay or queue a request's execution, and support undoable operations.</p>
-<p>Imagine you are making a Copy Button. You realize that copying needs to be invoked from multiple places like the button, or even hit <code>ctrl + c</code> on the keyboard. Originally, having the CopyButton implement the copy logic was fine. But as you add context menus, shortcuts, and other ways to copy, you have to duplicate the copy logic.</p>
-<p>The command patterns suggests that GUI objects should not send requests directly. Instead, they should send requests to a command object, which will execute the request. So the GUI just triggers the command, which handles the details.</p>
-<p>So instead of all the button subclasses like CopyButton, etc, we can have the Button class store a reference to a command object. When the button is clicked, it calls the command object's execute method. So now, we can just implement different command objects for different actions.</p>
-<p>Handlers in <a href="/design-patterns/behavioral/chain-of-responsibility.md">Chain of Responsibility (COR)</a> can be Commands. Or the request itself can be a command.</p>
-<p>You can use Command along with <a href="/design-patterns/behavioral/memento.md">memento</a> to implement <code>undo</code> since memento can save the state just before the command executes.</p>
+<p>Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.</p>
+<p>Subscribers (aka observers) can subscribe to a subject, and the Publisher (aka subject) notifies all subscribers when an event occurs.</p>
+<p>You can use observer with <a href="/design-patterns/behavioral/command.md">Command</a> to implement undoable operations. and <a href="/design-patterns/behavioral/iterator.md">Iterator</a> to traverse the history of the observers.</p>
+<p>Sometimes, <a href="/design-patterns/creational/prototype.md">Prototype</a> can be a simpler alternative if easy cloning is possible.</p>
 <h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">¶</a></h2>
 <ol>
-<li><strong>Open/Closed Principle</strong>: You can introduce new commands into the app without breaking existing client code.</li>
-<li><strong>Principle of separation of concerns</strong>: We can decouple GUI from business logic.</li>
+<li>You can produce snapshots of the object’s state without violating its encapsulation.</li>
+<li>You can simplify the originator’s code by letting the caretaker maintain the history of the originator’s state.</li>
 </ol>
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h2>
-<p>Let's say you have a TV. You can turn it on with a button on the remote or the button on the TV. You can also change the volume with both the remote and the buttons on the TV. </p>
+<p>Let's say a customer visits the store everyday to check a product's availability. That's a waste of time. The store could also send a bunch of emails daily, but that gets very annoying. The Observer pattern can help here:</p>
+<p>The product's availability is the <code>subject</code>. The store is the <code>publisher</code>, and the customer is the <code>subscriber</code>. The customer can subscribe to the product's availability and get notified when it's available.</p>
+<p>All subscribers should implement the same interface and the publisher communicates with them only via that interface.</p>
 <p>In this example:</p>
 <ul>
-<li><code>Button</code> is the class that represents the sender of the command.</li>
-<li><code>Command</code> is the command interface.</li>
-<li><code>TurnOnCommand</code>, <code>TurnOffCommand</code>, <code>VolumeUpCommand</code>, and <code>VolumeDownCommand</code> are the concrete command classes.</li>
+<li><code>Store</code> is the publisher that notifies subscribers about product availability.</li>
+<li><code>Customer</code> is the subscriber (observer) that wants to know about product availability.</li>
 </ul>
 <h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">¶</a></h2>
 <ul>
-<li><code>Command</code> has an <code>execute()</code> method.</li>
-<li><code>Button</code> has a <code>Command</code> and onClick() method that calls the <code>execute()</code> method of the <code>Command</code>.</li>
+<li><code>Subscriber</code> (Observer) is an interface that all subscribers should implement, it has an <code>update()</code> method, which is called by the <code>Store</code>.</li>
+<li><code>Customer</code> is a concrete subscriber that implements the <code>Subscriber</code> interface.</li>
+<li><code>Store</code> (Publisher) has a list of subscribers, a <code>notify()</code> method, and methods to add and remove subscribers.</li>
+<li>Usually, the <code>notify()</code> method iterates over the list of subscribers and calls their <code>update()</code> method.</li>
 </ul>
 <h3 id="diagram">Diagram<a class="headerlink" href="#diagram" title="Permanent link">¶</a></h3>
 <pre class="mermaid"><code>classDiagram
-    class Command {
-        +execute()
+    class Subscriber {
+        +update()
     }
 
-    class TurnOnCommand {
-        +execute()
+    class Customer {
+        -name: String
+        +update()
     }
 
-    class TurnOffCommand {
-        +execute()
+    class Store {
+        -subscribers: List~Subscriber~
+        +addSubscriber(subscriber: Subscriber)
+        +removeSubscriber(subscriber: Subscriber)
+        +notify()
     }
 
-    class VolumeUpCommand {
-        +execute()
-    }
-
-    class VolumeDownCommand {
-        +execute()
-    }
-
-    class Button {
-        -Command command
-        +Button(Command command)
-        +onClick()
-    }
-
-
-    Command &lt;|-- TurnOnCommand
-    Command &lt;|-- TurnOffCommand
-    Command &lt;|-- VolumeUpCommand
-    Command &lt;|-- VolumeDownCommand
-
-    Button --&gt; Command
+    Store --&gt; Subscriber : manages
+    Customer ..|&gt; Subscriber : implements
 </code></pre>
 <h3 id="code-implementation">Code Implementation<a class="headerlink" href="#code-implementation" title="Permanent link">¶</a></h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Subscriber</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Subclass must implement abstract method"</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">Subscriber</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has been notified."</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Button</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">Command</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="n">command</span>
+<span class="k">class</span> <span class="nc">Store</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscribers</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">onClick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">add_subscriber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscribers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">remove_subscriber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscribers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">TurnOnCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Turning on TV"</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">TurnOffCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Turning off TV"</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">VolumeUpCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Turning up volume"</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">VolumeDownCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Turning down volume"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">subscriber</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscribers</span><span class="p">:</span>
+            <span class="n">subscriber</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">"fmt"</span>
-<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">"fmt"</span>
 
-<span class="c1">// Command interface</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">Command</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Execute</span><span class="p">()</span>
+<span class="c1">// Subscriber interface that all subscribers must implement</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Subscriber</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Update</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="c1">// Button struct</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">command</span><span class="w"> </span><span class="nx">Command</span>
+<span class="c1">// Customer is a concrete subscriber that implements the Subscriber interface</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Customer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
 <span class="p">}</span>
 
-<span class="c1">// NewButton creates a new Button with a given command</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewButton</span><span class="p">(</span><span class="nx">command</span><span class="w"> </span><span class="nx">Command</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Button</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Button</span><span class="p">{</span><span class="nx">command</span><span class="p">:</span><span class="w"> </span><span class="nx">command</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Customer</span><span class="p">)</span><span class="w"> </span><span class="nx">Update</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"%s has been notified.\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// OnClick calls the execute method of the command</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">Button</span><span class="p">)</span><span class="w"> </span><span class="nx">OnClick</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">command</span><span class="p">.</span><span class="nx">Execute</span><span class="p">()</span>
+<span class="c1">// Store is the publisher that maintains a list of subscribers and notifies them</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Store</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">subscribers</span><span class="w"> </span><span class="p">[]</span><span class="nx">Subscriber</span>
 <span class="p">}</span>
 
-<span class="c1">// TurnOnCommand struct</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">TurnOnCommand</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">// Execute method for TurnOnCommand</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">TurnOnCommand</span><span class="p">)</span><span class="w"> </span><span class="nx">Execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Turning on TV"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Store</span><span class="p">)</span><span class="w"> </span><span class="nx">addSubscriber</span><span class="p">(</span><span class="nx">subscriber</span><span class="w"> </span><span class="nx">Subscriber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="p">,</span><span class="w"> </span><span class="nx">subscriber</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// TurnOffCommand struct</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">TurnOffCommand</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">// Execute method for TurnOffCommand</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">TurnOffCommand</span><span class="p">)</span><span class="w"> </span><span class="nx">Execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Turning off TV"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Store</span><span class="p">)</span><span class="w"> </span><span class="nx">removeSubscriber</span><span class="p">(</span><span class="nx">subscriber</span><span class="w"> </span><span class="nx">Subscriber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">sub</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">sub</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">subscriber</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="p">[:</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// VolumeUpCommand struct</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">VolumeUpCommand</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">// Execute method for VolumeUpCommand</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">VolumeUpCommand</span><span class="p">)</span><span class="w"> </span><span class="nx">Execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Turning up volume"</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// VolumeDownCommand struct</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">VolumeDownCommand</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">// Execute method for VolumeDownCommand</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">VolumeDownCommand</span><span class="p">)</span><span class="w"> </span><span class="nx">Execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Turning down volume"</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Store</span><span class="p">)</span><span class="w"> </span><span class="nx">notify</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">subscriber</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">subscribers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">subscriber</span><span class="p">.</span><span class="nx">Update</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
@@ -659,43 +620,51 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">command</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">Button</span><span class="p">,</span>
-    <span class="n">TurnOnCommand</span><span class="p">,</span>
-    <span class="n">TurnOffCommand</span><span class="p">,</span>
-    <span class="n">VolumeUpCommand</span><span class="p">,</span>
-    <span class="n">VolumeDownCommand</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">observer</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Customer</span>
 
-<span class="n">remote_on_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">TurnOnCommand</span><span class="p">())</span>
-<span class="n">remote_off_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">TurnOffCommand</span><span class="p">())</span>
-<span class="n">remote_volume_up_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">VolumeUpCommand</span><span class="p">())</span>
-<span class="n">remote_volume_down_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">VolumeDownCommand</span><span class="p">())</span>
 
-<span class="n">tv_on_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">TurnOnCommand</span><span class="p">())</span>
-<span class="n">tv_off_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">TurnOffCommand</span><span class="p">())</span>
-<span class="n">tv_volume_up_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">VolumeUpCommand</span><span class="p">())</span>
-<span class="n">tv_volume_down_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">VolumeDownCommand</span><span class="p">())</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">Store</span><span class="p">()</span>
+
+<span class="n">customer1</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">"Customer 1"</span><span class="p">)</span>
+<span class="n">customer2</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">"Customer 2"</span><span class="p">)</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">add_subscriber</span><span class="p">(</span><span class="n">customer1</span><span class="p">)</span>
+<span class="n">store</span><span class="o">.</span><span class="n">add_subscriber</span><span class="p">(</span><span class="n">customer2</span><span class="p">)</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+<span class="c1"># Outputs:</span>
+<span class="c1"># Customer 1 has been notified.</span>
+<span class="c1"># Customer 2 has been notified.</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">remove_subscriber</span><span class="p">(</span><span class="n">customer1</span><span class="p">)</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+<span class="c1"># Outputs:</span>
+<span class="c1"># Customer 2 has been notified.</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">turnOnCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">TurnOnCommand</span><span class="p">{}</span>
-<span class="w">    </span><span class="nx">turnOffCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">TurnOffCommand</span><span class="p">{}</span>
-<span class="w">    </span><span class="nx">volumeUpCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">VolumeUpCommand</span><span class="p">{}</span>
-<span class="w">    </span><span class="nx">volumeDownCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">VolumeDownCommand</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">store</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Store</span><span class="p">{}</span>
 
-<span class="w">    </span><span class="nx">onButton</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewButton</span><span class="p">(</span><span class="nx">turnOnCommand</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">offButton</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewButton</span><span class="p">(</span><span class="nx">turnOffCommand</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">volumeUpButton</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewButton</span><span class="p">(</span><span class="nx">volumeUpCommand</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">volumeDownButton</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewButton</span><span class="p">(</span><span class="nx">volumeDownCommand</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">customer1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Customer</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Customer 1"</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">customer2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Customer</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Customer 2"</span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">onButton</span><span class="p">.</span><span class="nx">OnClick</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">offButton</span><span class="p">.</span><span class="nx">OnClick</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">volumeUpButton</span><span class="p">.</span><span class="nx">OnClick</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">volumeDownButton</span><span class="p">.</span><span class="nx">OnClick</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">store</span><span class="p">.</span><span class="nx">addSubscriber</span><span class="p">(</span><span class="nx">customer1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">store</span><span class="p">.</span><span class="nx">addSubscriber</span><span class="p">(</span><span class="nx">customer2</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">store</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// Outputs:</span>
+<span class="w">    </span><span class="c1">// Customer 1 has been notified.</span>
+<span class="w">    </span><span class="c1">// Customer 2 has been notified.</span>
+
+<span class="w">    </span><span class="nx">store</span><span class="p">.</span><span class="nx">removeSubscriber</span><span class="p">(</span><span class="nx">customer1</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">store</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// Outputs:</span>
+<span class="w">    </span><span class="c1">// Customer 2 has been notified.</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>

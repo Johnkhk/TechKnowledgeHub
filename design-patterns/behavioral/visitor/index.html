@@ -1,0 +1,833 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../template-method/" rel="prev"/>
+<link href="../../../system-design/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-9.5.26" name="generator"/>
+<title>Visitor - Tech Knowledge Hub</title>
+<link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#visitor-pattern">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Tech Knowledge Hub" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Tech Knowledge Hub">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Tech Knowledge Hub
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Visitor
+            
+          </span>
+</div>
+</div>
+</div>
+<script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Tech Knowledge Hub" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Tech Knowledge Hub">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Tech Knowledge Hub
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
+    Home
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Design Patterns
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Design Patterns
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../design-patterns/">
+<span class="md-ellipsis">
+    Overview
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Creational
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+            Creational
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/singleton/">
+<span class="md-ellipsis">
+    Singleton
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/factory-method/">
+<span class="md-ellipsis">
+    Factory Method
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/abstract-factory/">
+<span class="md-ellipsis">
+    Abstract Factory
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/builder/">
+<span class="md-ellipsis">
+    Builder
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/prototype/">
+<span class="md-ellipsis">
+    Prototype
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../creational/object-pool/">
+<span class="md-ellipsis">
+    Object Pool
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Structural
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span>
+            Structural
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/adapter/">
+<span class="md-ellipsis">
+    Adapter
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/bridge/">
+<span class="md-ellipsis">
+    Bridge
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/composite/">
+<span class="md-ellipsis">
+    Composite
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/decorator/">
+<span class="md-ellipsis">
+    Decorator
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/facade/">
+<span class="md-ellipsis">
+    Facade
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/flyweight/">
+<span class="md-ellipsis">
+    Flyweight
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../structural/proxy/">
+<span class="md-ellipsis">
+    Proxy
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Behavioral
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span>
+            Behavioral
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chain-of-responsibility/">
+<span class="md-ellipsis">
+    Chain of Responsibility
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../command/">
+<span class="md-ellipsis">
+    Command
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../iterator/">
+<span class="md-ellipsis">
+    Iterator
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../mediator/">
+<span class="md-ellipsis">
+    Mediator
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../memento/">
+<span class="md-ellipsis">
+    Memento
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../observer/">
+<span class="md-ellipsis">
+    Observer
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../state/">
+<span class="md-ellipsis">
+    State
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../strategy/">
+<span class="md-ellipsis">
+    Strategy
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../template-method/">
+<span class="md-ellipsis">
+    Template Method
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Visitor
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Visitor
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      Description
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#benefits">
+<span class="md-ellipsis">
+      Benefits
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+<span class="md-ellipsis">
+      Example
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implementation">
+<span class="md-ellipsis">
+      Implementation
+    </span>
+</a>
+<nav aria-label="Implementation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diagram">
+<span class="md-ellipsis">
+      Diagram
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-implementation">
+<span class="md-ellipsis">
+      Code Implementation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-usage">
+<span class="md-ellipsis">
+      Code Usage
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../system-design/">
+<span class="md-ellipsis">
+    System Design
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      Description
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#benefits">
+<span class="md-ellipsis">
+      Benefits
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+<span class="md-ellipsis">
+      Example
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implementation">
+<span class="md-ellipsis">
+      Implementation
+    </span>
+</a>
+<nav aria-label="Implementation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diagram">
+<span class="md-ellipsis">
+      Diagram
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-implementation">
+<span class="md-ellipsis">
+      Code Implementation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code-usage">
+<span class="md-ellipsis">
+      Code Usage
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="visitor-pattern">Visitor Pattern<a class="headerlink" href="#visitor-pattern" title="Permanent link">¶</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">¶</a></h2>
+<p>Visitor is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.</p>
+<p>This pattern is especially useful when dealing with complex object structures, such as composite objects, where you want to perform different operations based on the type of each element.</p>
+<ol>
+<li>Elements accept Visitors: each element in the object structure has an <code>accept(visitor)</code> method that accepts a visitor object. It then calls the visitor's appropriate <code>visit(element)</code> method pass, passing itself as an argument.</li>
+<li>Visitor visits Elements: Visitors implement <code>visit(element)</code> methods for each type of element in the object structure. </li>
+<li>Double dispatch: The operation that gets executed depends on both the type of the visitor and the type of the element it visits.</li>
+</ol>
+<p>You can treat Visitor as a powerful version of the <a href="/design-patterns/behavioral/command.md">Command</a> pattern. Its objects can execute operations over various objects of different classes. </p>
+<p>You can use Visitor along with <a href="/design-patterns/behavioral/iterator.md">Iterator</a> to traverse a complex data structure and execute some operation over its elements, even if they all have different classes.</p>
+<h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">¶</a></h2>
+<ol>
+<li><strong>Open/Closed Principle</strong>: You can introduce a new behavior that can work with objects of different classes without changing these classes.</li>
+<li>A visitor object can accumulate some useful information while working with various objects. This might be handy when you want to traverse some complex object structure, such as an object tree, and apply the visitor to each object of this structure.</li>
+</ol>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h2>
+<p>Imagine you have geometric shapes: circles, squares, and triangles. You want to perform several operations on these shapes, such as calculating area, calculating perimeter, and rendering them on the screen.</p>
+<p>Instead of embedding these operations within the shape classes, you could define these operations in separate visitor classes.</p>
+<p>In this example:</p>
+<ul>
+<li><code>Shape</code> is the interface and <code>Circle</code>, <code>Square</code>, and <code>Triangle</code> are its concrete classes.</li>
+<li><code>Visitor</code> is the interface that defines the <code>visit_circle(circle)</code>, <code>visit_square(square)</code>, and <code>visit_triangle(triange)</code> methods. (some languages might not support method overloading)</li>
+<li><code>AreaCalculator</code> and <code>PerimeterCalculator</code> are concrete visitor classes that implement the <code>Visitor</code> interface.</li>
+</ul>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">¶</a></h2>
+<p>So despite the promise of not modifying the shape classes, we <strong>still</strong> need to modify them to accept visitors. (By adding an <code>accept(visitor)</code> method)</p>
+<ul>
+<li><code>Shape</code> has an <code>accept(visitor)</code> method.</li>
+<li><code>Circle</code>, <code>Square</code>, and <code>Triangle</code> implement the <code>accept(visitor)</code> method. (which calls the appropriate <code>visit</code> method of the visitor)</li>
+<li>Visitor interface has non-implemented <code>visit_circle(circle)</code>, <code>visit_square(square)</code>, and <code>visit_triangle(triangle)</code> methods.</li>
+</ul>
+<h3 id="diagram">Diagram<a class="headerlink" href="#diagram" title="Permanent link">¶</a></h3>
+<pre class="mermaid"><code>classDiagram
+    class Shape {
+        + accept(visitor: Visitor)
+    }
+
+    class Circle {
+        + accept(visitor: Visitor)
+    }
+
+    class Square {
+        + accept(visitor: Visitor)
+    }
+
+    class Triangle {
+        + accept(visitor: Visitor)
+    }
+
+    Shape &lt;|-- Circle
+    Shape &lt;|-- Square
+    Shape &lt;|-- Triangle
+
+    class Visitor {
+        + visit_circle(circle: Circle)
+        + visit_square(square: Square)
+        + visit_triangle(triangle: Triangle)
+    }
+
+    class AreaCalculator {
+        + visit_circle(circle: Circle)
+        + visit_square(square: Square)
+        + visit_triangle(triangle: Triangle)
+    }
+
+    class PerimeterCalculator {
+        + visit_circle(circle: Circle)
+        + visit_square(square: Square)
+        + visit_triangle(triangle: Triangle)
+    }
+
+    Circle --&gt; Visitor : accept(visitor)
+    Square --&gt; Visitor : accept(visitor)
+    Triangle --&gt; Visitor : accept(visitor)
+
+    Visitor &lt;|-- AreaCalculator
+    Visitor &lt;|-- PerimeterCalculator
+
+</code></pre>
+<h3 id="code-implementation">Code Implementation<a class="headerlink" href="#code-implementation" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Go</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="c1"># Visitor interface</span>
+<span class="k">class</span> <span class="nc">Visitor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">visit_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circle</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">visit_square</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">square</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">visit_triangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangle</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="c1"># Concrete Visitor for calculating area</span>
+<span class="k">class</span> <span class="nc">AreaCalculator</span><span class="p">(</span><span class="n">Visitor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">visit_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circle</span><span class="p">):</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Circle area: </span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">visit_square</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">square</span><span class="p">):</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">square</span><span class="o">.</span><span class="n">side</span> <span class="o">*</span> <span class="n">square</span><span class="o">.</span><span class="n">side</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Square area: </span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">visit_triangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangle</span><span class="p">):</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">triangle</span><span class="o">.</span><span class="n">base</span> <span class="o">*</span> <span class="n">triangle</span><span class="o">.</span><span class="n">height</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Triangle area: </span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="c1"># Concrete Visitor for calculating perimeter</span>
+<span class="k">class</span> <span class="nc">PerimeterCalculator</span><span class="p">(</span><span class="n">Visitor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">visit_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circle</span><span class="p">):</span>
+        <span class="n">perimeter</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="n">circle</span><span class="o">.</span><span class="n">radius</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Circle perimeter: </span><span class="si">{</span><span class="n">perimeter</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">visit_square</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">square</span><span class="p">):</span>
+        <span class="n">perimeter</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">square</span><span class="o">.</span><span class="n">side</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Square perimeter: </span><span class="si">{</span><span class="n">perimeter</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">visit_triangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangle</span><span class="p">):</span>
+        <span class="n">perimeter</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="n">side_a</span> <span class="o">+</span> <span class="n">triangle</span><span class="o">.</span><span class="n">side_b</span> <span class="o">+</span> <span class="n">triangle</span><span class="o">.</span><span class="n">side_c</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Triangle perimeter: </span><span class="si">{</span><span class="n">perimeter</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="c1"># Shape interface</span>
+<span class="k">class</span> <span class="nc">Shape</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="c1"># Concrete Shape: Circle</span>
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+        <span class="n">visitor</span><span class="o">.</span><span class="n">visit_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="c1"># Concrete Shape: Square</span>
+<span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+
+    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+        <span class="n">visitor</span><span class="o">.</span><span class="n">visit_square</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="c1"># Concrete Shape: Triangle</span>
+<span class="k">class</span> <span class="nc">Triangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side_a</span><span class="p">,</span> <span class="n">side_b</span><span class="p">,</span> <span class="n">side_c</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_a</span> <span class="o">=</span> <span class="n">side_a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_b</span> <span class="o">=</span> <span class="n">side_b</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_c</span> <span class="o">=</span> <span class="n">side_c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">side_a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">side_b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">side_a</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>  <span class="c1"># assuming it's an isosceles triangle</span>
+
+    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+        <span class="n">visitor</span><span class="o">.</span><span class="n">visit_triangle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"math"</span>
+<span class="p">)</span>
+
+<span class="c1">// Visitor interface</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Visitor</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">VisitCircle</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Circle</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">VisitSquare</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Square</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">VisitTriangle</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Triangle</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Concrete Visitor for calculating area</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">AreaCalculator</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="nx">AreaCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitCircle</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Circle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">area</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Circle area: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">area</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="nx">AreaCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitSquare</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Square</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">area</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Side</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Side</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Square area: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">area</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="nx">AreaCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitTriangle</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Triangle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">area</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Height</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Triangle area: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">area</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Concrete Visitor for calculating perimeter</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">PerimeterCalculator</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">PerimeterCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitCircle</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Circle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">perimeter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Circle perimeter: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">perimeter</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">PerimeterCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitSquare</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Square</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">perimeter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Side</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Square perimeter: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">perimeter</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">PerimeterCalculator</span><span class="p">)</span><span class="w"> </span><span class="nx">VisitTriangle</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Triangle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">perimeter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">SideA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">SideB</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">SideC</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Triangle perimeter: %.2f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">perimeter</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Shape interface</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Shape</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Accept</span><span class="p">(</span><span class="nx">visitor</span><span class="w"> </span><span class="nx">Visitor</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Circle struct</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Circle</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Radius</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Circle</span><span class="p">)</span><span class="w"> </span><span class="nx">Accept</span><span class="p">(</span><span class="nx">visitor</span><span class="w"> </span><span class="nx">Visitor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">visitor</span><span class="p">.</span><span class="nx">VisitCircle</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Square struct</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Square</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Side</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Square</span><span class="p">)</span><span class="w"> </span><span class="nx">Accept</span><span class="p">(</span><span class="nx">visitor</span><span class="w"> </span><span class="nx">Visitor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">visitor</span><span class="p">.</span><span class="nx">VisitSquare</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Triangle struct</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Triangle</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SideA</span><span class="w">  </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">SideB</span><span class="w">  </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">SideC</span><span class="w">  </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">Base</span><span class="w">   </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">Height</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewTriangle</span><span class="p">(</span><span class="nx">sideA</span><span class="p">,</span><span class="w"> </span><span class="nx">sideB</span><span class="p">,</span><span class="w"> </span><span class="nx">sideC</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Triangle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// assuming it's an isosceles triangle for simplicity</span>
+<span class="w">    </span><span class="nx">height</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Sqrt</span><span class="p">(</span><span class="nx">sideB</span><span class="o">*</span><span class="nx">sideB</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="nx">sideA</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="nx">sideA</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Triangle</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SideA</span><span class="p">:</span><span class="w">  </span><span class="nx">sideA</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">SideB</span><span class="p">:</span><span class="w">  </span><span class="nx">sideB</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">SideC</span><span class="p">:</span><span class="w">  </span><span class="nx">sideC</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Base</span><span class="p">:</span><span class="w">   </span><span class="nx">sideA</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Height</span><span class="p">:</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Triangle</span><span class="p">)</span><span class="w"> </span><span class="nx">Accept</span><span class="p">(</span><span class="nx">visitor</span><span class="w"> </span><span class="nx">Visitor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">visitor</span><span class="p">.</span><span class="nx">VisitTriangle</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></div>
+<h3 id="code-usage">Code Usage<a class="headerlink" href="#code-usage" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">Go</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">visitor</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">Square</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">AreaCalculator</span><span class="p">,</span> <span class="n">PerimeterCalculator</span>
+
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">Square</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+<span class="n">area_calculator</span> <span class="o">=</span> <span class="n">AreaCalculator</span><span class="p">()</span>
+<span class="n">perimeter_calculator</span> <span class="o">=</span> <span class="n">PerimeterCalculator</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+    <span class="n">shape</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">area_calculator</span><span class="p">)</span>
+    <span class="n">shape</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">perimeter_calculator</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">shapes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">Shape</span><span class="p">{</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="nx">Circle</span><span class="p">{</span><span class="nx">Radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="nx">Square</span><span class="p">{</span><span class="nx">Side</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">NewTriangle</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">areaCalculator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">AreaCalculator</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">perimeterCalculator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">PerimeterCalculator</span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">shapes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">shape</span><span class="p">.</span><span class="nx">Accept</span><span class="p">(</span><span class="nx">areaCalculator</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">shape</span><span class="p">.</span><span class="nx">Accept</span><span class="p">(</span><span class="nx">perimeterCalculator</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></div>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script></body>
+</html>
