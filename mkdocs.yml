@@ -49,6 +49,7 @@ nav:
           - State: design-patterns/behavioral/state.md
           - Strategy: design-patterns/behavioral/strategy.md
           - Template Method: design-patterns/behavioral/template-method.md
+          - Visitor: design-patterns/behavioral/visitor.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
