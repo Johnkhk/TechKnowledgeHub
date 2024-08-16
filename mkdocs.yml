@@ -47,6 +47,7 @@ nav:
           - Memento: design-patterns/behavioral/memento.md
           - Observer: design-patterns/behavioral/observer.md
           - State: design-patterns/behavioral/state.md
+          - Strategy: design-patterns/behavioral/strategy.md
           # Add other behavioral pattern links here
   - System Design: system-design/index.md
 
