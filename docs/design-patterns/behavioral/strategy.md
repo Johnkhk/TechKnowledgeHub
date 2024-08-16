@@ -53,7 +53,6 @@ classDiagram
     }
 
     class evictionAlgo {
-        <<interface>>
         + void evict()
     }
 
