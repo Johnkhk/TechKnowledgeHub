@@ -74,24 +74,6 @@ classDiagram
     evictionAlgo <|-- LFU
 ```
 
-#### Strategy Diagram Of Example
-
-```mermaid
-strategyDiagram-v2
-    [*] --> NoItem
-    NoItem --> HasItem : Add item
-    HasItem --> ItemRequested : Select item
-    ItemRequested --> HasMoney : Insert money
-    HasMoney --> NoItem : Dispense item
-    HasItem --> HasItem : Add item
-    ItemRequested --> ItemRequested : Select item
-    ItemRequested --> ItemRequested : Add item
-    HasMoney --> HasMoney : Insert money
-    HasMoney --> HasMoney : Select item
-    NoItem --> NoItem : Select item
-    NoItem --> NoItem : Insert money
-    NoItem --> NoItem : Dispense item
-```
 
 ### Code Implementation
 

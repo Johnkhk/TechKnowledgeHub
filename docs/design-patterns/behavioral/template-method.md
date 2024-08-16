@@ -35,50 +35,31 @@ In this example:
 ```mermaid
 classDiagram
     class OTP {
-        + generateOTP(): void
-        + saveOTP(otp: string): void
-        + prepareContent(): void
-        + sendNotification(): void
-        + process(): void
+        + generateOTP()
+        + saveOTP(otp: string)
+        + prepareContent()
+        + sendNotification()
+        + process()
     }
 
     class SMSOTP {
-        + prepareContent(): void
-        + sendNotification(): void
+        + prepareContent()
+        + sendNotification()
     }
 
     class EmailOTP {
-        + prepareContent(): void
-        + sendNotification(): void
+        + prepareContent()
+        + sendNotification()
     }
 
     class AuthenticatorOTP {
-        + prepareContent(): void
-        + sendNotification(): void
+        + prepareContent()
+        + sendNotification()
     }
 
     OTP <|-- SMSOTP
     OTP <|-- EmailOTP
     OTP <|-- AuthenticatorOTP
-```
-
-#### Template Method Diagram Of Example
-
-```mermaid
-template methodDiagram-v2
-    [*] --> NoItem
-    NoItem --> HasItem : Add item
-    HasItem --> ItemRequested : Select item
-    ItemRequested --> HasMoney : Insert money
-    HasMoney --> NoItem : Dispense item
-    HasItem --> HasItem : Add item
-    ItemRequested --> ItemRequested : Select item
-    ItemRequested --> ItemRequested : Add item
-    HasMoney --> HasMoney : Insert money
-    HasMoney --> HasMoney : Select item
-    NoItem --> NoItem : Select item
-    NoItem --> NoItem : Insert money
-    NoItem --> NoItem : Dispense item
 ```
 
 ### Code Implementation
